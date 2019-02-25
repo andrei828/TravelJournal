@@ -115,7 +115,9 @@ public class ManageTrip extends AppCompatActivity {
         }
     }
 
-    public void openGallery(View view) { dispatchGalleryIntent(); }
+    public void openGallery(View view) {
+        dispatchGalleryIntent();
+    }
 
     private void dispatchGalleryIntent() {
         Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);

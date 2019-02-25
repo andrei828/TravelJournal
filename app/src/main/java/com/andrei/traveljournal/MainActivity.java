@@ -63,13 +63,16 @@ public class MainActivity extends AppCompatActivity
         // define and set layout manager
         mRecycleViewTripCards.setLayoutManager(new LinearLayoutManager(this));
 
+        // add the view model
+        mTripDataViewModel = ViewModelProviders.of(this).get(TripDataViewModel.class);
+
         // get the adapter instance
-        final TripDataAdapter tripDataAdapter = new TripDataAdapter(this);
+        final TripDataAdapter tripDataAdapter = new TripDataAdapter(this, mTripDataViewModel);
 
         // set the adapter to the recycler view
         mRecycleViewTripCards.setAdapter(tripDataAdapter);
 
-        mTripDataViewModel = ViewModelProviders.of(this).get(TripDataViewModel.class);
+
         mTripDataViewModel.getAllTripsData().observe(this, new Observer<List<TripData>>() {
             @Override
             public void onChanged(@Nullable List<TripData> tripsData) {
@@ -77,7 +80,6 @@ public class MainActivity extends AppCompatActivity
                 tripDataAdapter.setTripsData(tripsData);
             }
         });
-
     }
 
     private List<TripData> GenerateFavouriteTripCards(List<TripData> TripCards)

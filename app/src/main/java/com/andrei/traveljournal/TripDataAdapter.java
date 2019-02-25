@@ -14,12 +14,12 @@ public class TripDataAdapter extends RecyclerView.Adapter<TripDataViewHolder> {
 
     private List<TripData> mTripCards;
     private final LayoutInflater mInflater;
+    private TripDataViewModel mTripDataViewModel;
 
-    /*public TripDataAdapter(List<TripData>mTripCards) {
-        this.mTripCards = mTripCards;
-    }*/
-
-    public TripDataAdapter(Context context) { mInflater = LayoutInflater.from(context); }
+    public TripDataAdapter(Context context, TripDataViewModel tripDataViewModel) {
+        mInflater = LayoutInflater.from(context);
+        mTripDataViewModel = tripDataViewModel;
+    }
 
     @NonNull
     @Override
@@ -55,6 +55,7 @@ public class TripDataAdapter extends RecyclerView.Adapter<TripDataViewHolder> {
                     mTripCards.get(position).setFavourite(true);
                 }
                 notifyItemChanged(position);
+                mTripDataViewModel.update(mTripCards.get(position));
             }
         });
     }
